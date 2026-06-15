@@ -153,9 +153,11 @@ React重新计算
 把下面代码复制到index.jsx：
 
 ```jsx
+// 1. 引入 React 和 ReactDOM 
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
+// 2. 定义一个组件 (App)
 function App() {
   // 这就是我们的 State（数据）
   const [count, setCount] = useState(0);
@@ -172,6 +174,8 @@ function App() {
   );
 }
 
+// 3. 找到 HTML 中的挂载点并渲染
+// 确保 index.html 中有 <div id="root"></div>
 const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 ```
