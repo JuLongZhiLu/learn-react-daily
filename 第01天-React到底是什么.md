@@ -144,6 +144,47 @@ React重新计算
 
 ---
 
+## 动手练习
+
+去这个网站：
+
+[React Playground](https://playcode.io/react?utm_source=chatgpt.com)
+
+把下面代码复制到index.jsx：
+
+```jsx
+import React, { useState } from 'react';
+import { createRoot } from 'react-dom/client';
+
+function App() {
+  // 这就是我们的 State（数据）
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <h2>当前数字：{count}</h2>
+      
+      {/* 点击按钮，修改数据，React 会自动帮你更新页面 */}
+      <button onClick={() => setCount(count + 1)}>
+        点我 + 1
+      </button>
+    </div>
+  );
+}
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
+```
+
+切换到 Preview 并尝试点击按钮：
+
+看看页面是否立即变化。
+
+<img width="1920" height="971" alt="image" src="https://github.com/user-attachments/assets/fadd0c35-7e8a-4084-a11b-7b811bdbebd4" />
+
+
+---
+
 ## 明天可以学什么？
 
 建议按这个顺序：
