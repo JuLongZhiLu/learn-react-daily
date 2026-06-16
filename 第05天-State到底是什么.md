@@ -153,6 +153,256 @@ root.render(<App />);
 
 这就是 **State** 赋予以网页实时动态交互的魔力。
 
+其中的`...buttonStyle,backgroundColor:'#10b981'`是什么意思？
+
+你这里第一次接触到了 **JavaScript 对象展开运算符（Spread Operator）**：
+
+```jsx
+style={{
+  ...buttonStyle,
+  backgroundColor:'#10b981'
+}}
+```
+
+先看你定义的 `buttonStyle`：
+
+```jsx
+const buttonStyle = {
+  backgroundColor: '#3b82f6',
+  color: 'white',
+  border: 'none',
+  padding: '8px 16px',
+  borderRadius: '6px',
+  cursor: 'pointer',
+  marginRight: '10px'
+};
+```
+
+它本质上是一个 JavaScript 对象：
+
+```js
+{
+  backgroundColor: '#3b82f6',
+  color: 'white',
+  border: 'none',
+  ...
+}
+```
+
+---
+
+## `...buttonStyle` 是什么意思？
+
+展开：
+
+```js
+...buttonStyle
+```
+
+相当于：
+
+```js
+backgroundColor: '#3b82f6',
+color: 'white',
+border: 'none',
+padding: '8px 16px',
+borderRadius: '6px',
+cursor: 'pointer',
+marginRight: '10px'
+```
+
+所以：
+
+```jsx
+style={{
+  ...buttonStyle,
+  backgroundColor:'#10b981'
+}}
+```
+
+实际上等价于：
+
+```jsx
+style={{
+  backgroundColor: '#3b82f6',
+  color: 'white',
+  border: 'none',
+  padding: '8px 16px',
+  borderRadius: '6px',
+  cursor: 'pointer',
+  marginRight: '10px',
+
+  backgroundColor:'#10b981'
+}}
+```
+
+---
+
+## 为什么最后是绿色？
+
+因为对象里：
+
+```js
+{
+  backgroundColor:'#3b82f6',
+  backgroundColor:'#10b981'
+}
+```
+
+后面的会覆盖前面的。
+
+所以最终得到：
+
+```js
+{
+  backgroundColor:'#10b981',
+  color:'white',
+  border:'none',
+  padding:'8px 16px',
+  borderRadius:'6px',
+  cursor:'pointer',
+  marginRight:'10px'
+}
+```
+
+于是按钮从蓝色：
+
+```text
+#3b82f6
+```
+
+变成绿色：
+
+```text
+#10b981
+```
+
+---
+
+## 为什么这么写？
+
+因为这样可以复用样式。
+
+例如：
+
+```jsx
+<button style={buttonStyle}>
+  点赞
+</button>
+```
+
+蓝色按钮。
+
+---
+
+另一个按钮：
+
+```jsx
+<button
+  style={{
+    ...buttonStyle,
+    backgroundColor:'#10b981'
+  }}
+>
+  展开详情
+</button>
+```
+
+继承所有样式：
+
+```text
+padding
+border
+radius
+cursor
+margin
+...
+```
+
+只改：
+
+```text
+backgroundColor
+```
+
+这样就不用复制一大堆代码。
+
+---
+
+## React 中非常常见的写法
+
+根据状态动态覆盖样式：
+
+```jsx
+<button
+  style={{
+    ...buttonStyle,
+    backgroundColor: isOpen
+      ? '#ef4444'
+      : '#10b981'
+  }}
+>
+```
+
+效果：
+
+```text
+展开时 → 红色
+收起时 → 绿色
+```
+
+因为：
+
+```js
+{
+  ...buttonStyle,
+  backgroundColor: ...
+}
+```
+
+最后总会覆盖掉原来的蓝色。
+
+---
+
+## 你可以把它理解成
+
+```js
+...buttonStyle
+```
+
+就是：
+
+> 把 buttonStyle 里面的所有属性复制到这里。
+
+例如：
+
+```js
+const person = {
+  name: 'Tom',
+  age: 20
+}
+
+const newPerson = {
+  ...person,
+  age: 21
+}
+```
+
+结果：
+
+```js
+{
+  name: 'Tom',
+  age: 21
+}
+```
+
+`name` 被保留，
+
+`age` 被覆盖。
+
+和你的按钮样式完全一样。
+
 ---
 
 ## 明天可以学什么？
