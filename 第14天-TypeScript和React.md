@@ -108,7 +108,7 @@ function TaskItem({ task, onToggle }: TaskItemProps) {
       justifyContent: 'space-between',
       alignItems: 'center',
       padding: '10px',
-      backgroundColor: '#f8fafc',
+      backgroundColor: '#636363ff',
       borderRadius: '6px',
       marginBottom: '8px',
       border: '1px solid #e2e8f0',
